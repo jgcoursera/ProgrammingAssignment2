@@ -1,15 +1,21 @@
-## Put comments here that give an overall description of what your
-## functions do
 
-## Write a short comment describing this function
+## memoized inverse closure
 
 makeCacheMatrix <- function(x = matrix()) {
-
+  inv <- NULL
+  get <- function() x
+  get_inv <- function() { 
+    if (is.null(inv))
+      inv <<- solve(x)
+    return(inv)
+  }
+  
+  list(get=get, inv=get_inv)
 }
 
 
-## Write a short comment describing this function
+## returns the cached value
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
+   x$inv()
 }
